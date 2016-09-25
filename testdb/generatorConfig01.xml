@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="D:/cheer/workspace/MyBlog/WebRoot/WEB-INF/lib/mysql-connector-java-5.1.38.jar" />
+	<context id="context3" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection
+			connectionURL="jdbc:mysql://localhost:3306/blognet?useUnicode=true&amp;characterEncoding=utf8"
+			driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<javaModelGenerator targetPackage=""
+			targetProject="D:\cheer\workspace\MyBlog\src\com\bomb\model" />
+		<sqlMapGenerator targetPackage=""
+			targetProject="D:\cheer\workspace\MyBlog\resources\com\bomb\mapper" />
+		<javaClientGenerator targetPackage=""
+			targetProject="D:\cheer\workspace\MyBlog\src\com\bomb\dao" type="XMLMAPPER" />
+
+		<table tableName="net_admin" domainObjectName="AdminUser"
+			enableCountByExample="false" enableSelectByExample="true"
+			enableUpdateByExample="false" enableDeleteByExample="false">
+		</table>
+	</context>
+</generatorConfiguration>

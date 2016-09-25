@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
+		<setting name="useGeneratedKeys" value="true" />
+
+		<!-- 使用列别名替换列名 默认true -->
+		<setting name="useColumnLabel" value="true" />
+
+		<!-- 开启驼峰命名转换 ,例如user_fk->userFk -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+
+		<!-- 配置全局性 cache 的 ( 开 / 关) default:true -->
+		<setting name="cacheEnabled" value="true" />
+
+		<!--是否使用 懒加载 关联对象 同 hibernate中的延迟加载 一样 default:true -->
+		<setting name="lazyLoadingEnabled" value="true" />
+
+		<!--是否允许单条sql 返回多个数据集 (取决于驱动的兼容性) default:true -->
+		<setting name="multipleResultSetsEnabled" value="true" />
+
+		<!-- 配置默认的执行器。SIMPLE 就是普通的执行器；REUSE 执行器会重用预处理语句（prepared statements）；BATCH 
+			执行器将重用语句并执行批量更新 -->
+		<setting name="defaultExecutorType" value="REUSE" />
+
+		<!-- 设置驱动等待数据响应的超时数 默认没有设置 -->
+		<setting name="defaultStatementTimeout" value="25000" />
+
+		<!-- 指定 MyBatis 所用日志的具体实现，未指定时将自动查找 -->
+		<setting name="logImpl" value="LOG4J" />
+	</settings>
+	
+	<!-- 
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<property name="dialect" value="oracle" />
+		</plugin>
+	</plugins>
+	 -->
+</configuration>  

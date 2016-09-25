@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bomb.dao.BlogMapper">
+	<resultMap id="BaseResultMap" type="com.bomb.model.Blog">
+		<id column="id" property="id" jdbcType="CHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="image_full_path" property="imageFullPath"
+			jdbcType="VARCHAR" />
+		<result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+		<association property="adminname" javaType="com.bomb.model.AdminUser"
+			resultMap="AdminUserResultMap" />
+	</resultMap>
+
+	<resultMap id="AdminUserResultMap" type="com.bomb.model.AdminUser">
+		<id column="t_id" property="id" jdbcType="CHAR" />
+		<result column="t_adminname" property="adminname" jdbcType="VARCHAR" />
+		<result column="t_password" property="password" jdbcType="VARCHAR" />
+		<result column="t_permission" property="permission" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="getidByAdminBlogs" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		B.id id,
+		B.title title,
+		B.content content,
+		B.image_full_path image_full_path,
+		B.createtime createtime,
+		A.id t_id,
+		A.adminname t_adminname
+		from net_blog B left outer join net_admin A on
+		B.id = A.id
+		where B.id = #{id,jdbcType=CHAR}
+	</select>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, title, content, image_full_path, createtime
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.bomb.model.BlogExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from net_blog
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from net_blog
+		where id = #{id,jdbcType=CHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		net_blog
+		where id = #{id,jdbcType=CHAR}
+	</delete>
+	<insert id="insert" parameterType="com.bomb.model.Blog">
+		insert into net_blog (id,
+		title, content,
+		image_full_path, createtime)
+		values
+		(#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR},
+		#{content,jdbcType=VARCHAR},
+		#{imageFullPath,jdbcType=VARCHAR},
+		#{createtime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.bomb.model.Blog">
+		insert into net_blog
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="imageFullPath != null">
+				image_full_path,
+			</if>
+			<if test="createtime != null">
+				createtime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=CHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="imageFullPath != null">
+				#{imageFullPath,jdbcType=VARCHAR},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.bomb.model.Blog">
+		update net_blog
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="imageFullPath != null">
+				image_full_path = #{imageFullPath,jdbcType=VARCHAR},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=CHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.bomb.model.Blog">
+		update net_blog
+		set title = #{title,jdbcType=VARCHAR},
+		content =
+		#{content,jdbcType=VARCHAR},
+		image_full_path =
+		#{imageFullPath,jdbcType=VARCHAR},
+		createtime =
+		#{createtime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=CHAR}
+	</update>
+</mapper>
