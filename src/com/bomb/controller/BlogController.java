@@ -1,5 +1,6 @@
 package com.bomb.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bomb.base.page.Page;
 import com.bomb.dto.BlogView;
 import com.bomb.model.Blog;
 import com.bomb.service.BlogService;
@@ -22,6 +24,18 @@ public class BlogController {
 	@Autowired
 	BlogService blogservice;
 
+	/*
+	 * 
+	 * 此方法不包含AdminUser类，只list Blog类
+	 * 
+	 * @RequestMapping("/index") public String index(@ModelAttribute("view")
+	 * BlogView view, Model model) { logger.info("list index-->" + view); if
+	 * (view != null) { view = new BlogView(); } if (view.getBloginfo() != null)
+	 * { view.setBloginfo(new Blog()); } List<Blog> list =
+	 * blogservice.list(view.getBloginfo()); view.setList(list);
+	 * model.addAttribute("view", view); return "bomb/index"; }
+	 */
+
 	@RequestMapping("/index")
 	public String index(@ModelAttribute("view") BlogView view, Model model) {
 		logger.info("list index-->" + view);
@@ -31,12 +45,19 @@ public class BlogController {
 		if (view.getBloginfo() != null) {
 			view.setBloginfo(new Blog());
 		}
-		List<Blog> list = blogservice.list(view.getBloginfo());
+		if (view.getPage() == null) {
+			Page page = new Page();
+			page.setPageNo(1);
+			view.setPage(page);
+		}
+		Integer total = blogservice.count(view.getBloginfo());
+		view.getPage().cal(total);
+		List<Blog> list = blogservice.list2("SLZQLT9UFSR6Z1S18JAR0NHLCFAO7PL4", view.getPage());
 		view.setList(list);
 		model.addAttribute("view", view);
-		return "bomb/index";
+		return "bomb/index2";
 	}
-	
+
 	@RequestMapping("/contact")
 	public String contact() {
 
@@ -50,20 +71,36 @@ public class BlogController {
 			Blog bloginfo = blogservice.info(view.getBloginfo().getId());
 			view.setBloginfo(bloginfo);
 		}
-		System.out.println(view);
 		model.addAttribute("view", view);
 		return "bomb/single";
 	}
-	
+
 	@RequestMapping("/update")
-	 public String update(){
+	public String update() {
 		return "";
 	}
-	
-	@RequestMapping("/search")
-	 public String search(){
-		
-		return "";
+
+	@RequestMapping("/write")
+	public String write() {
+
+		return "bomb/write";
+	}
+
+	@RequestMapping("/addWrite")
+	public String goWrite(@ModelAttribute BlogView view, Model model) {
+		logger.info("Input [add bloginfo]" + view);
+
+		if (view.getBloginfo() != null) {
+			Date time = new Date();
+
+			view.getBloginfo().setCreatetime(time);
+			view.getBloginfo().setPermission("SLZQLT9UFSR6Z1S18JAR0NHLCFAO7PL4");
+			view.getBloginfo().setAdminname(view.getBloginfo().getAdminname());
+			view.getBloginfo().setImageFullPath("images/img03.jpg");
+			blogservice.addBlog(view.getBloginfo());
+		}
+
+		return index(view, model);
 	}
 
 }

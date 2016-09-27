@@ -2,6 +2,7 @@ package com.bomb.dto;
 
 import java.util.List;
 
+import com.bomb.base.page.Page;
 import com.bomb.model.Blog;
 import com.bomb.model.User;
 
@@ -13,20 +14,7 @@ public class BlogView {
 
 	private User userinfo;
 
-	public BlogView(Blog bloginfo, List<Blog> list, User userinfo) {
-		super();
-		this.bloginfo = bloginfo;
-		this.list = list;
-		this.userinfo = userinfo;
-	}
-
-	public BlogView() {
-	}
-
-	@Override
-	public String toString() {
-		return "BlogView [bloginfo=" + bloginfo + ", list=" + list + ", userinfo=" + userinfo + "]";
-	}
+	private Page page;
 
 	public Blog getBloginfo() {
 		return bloginfo;
@@ -50,6 +38,30 @@ public class BlogView {
 
 	public void setUserinfo(User userinfo) {
 		this.userinfo = userinfo;
+	}
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
+
+	@Override
+	public String toString() {
+		return "BlogView [bloginfo=" + bloginfo + ", list=" + list + ", userinfo=" + userinfo + ", page=" + page + "]";
+	}
+
+	public BlogView(Blog bloginfo, List<Blog> list, User userinfo) {
+		super();
+		this.bloginfo = bloginfo;
+		this.list = list;
+		this.userinfo = userinfo;
+	}
+
+	public BlogView() {
+
 	}
 
 }

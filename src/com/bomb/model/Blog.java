@@ -16,29 +16,15 @@ public class Blog {
 	private Date createtime;
 
 	private AdminUser adminname;
-	
-	
 
-	@Override
-	public String toString() {
-		return "Blog [id=" + id + ", title=" + title + ", content=" + content + ", imageFullPath=" + imageFullPath
-				+ ", createtime=" + createtime + ", adminname=" + adminname + "]";
-	}
-
-	public AdminUser getAuthorname() {
-		return adminname;
-	}
-
-	public void setAuthorname(AdminUser adminname) {
-		this.adminname = adminname;
-	}
+	private String permission;
 
 	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
-		this.id = id == null ? null : id.trim();
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -72,4 +58,30 @@ public class Blog {
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
+
+	public AdminUser getAdminname() {
+		return adminname;
+	}
+
+	public void setAdminname(AdminUser adminname) {
+		this.adminname = adminname;
+	}
+
+	public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
+
+	@Override
+	public String toString() {
+		return "Blog [id=" + id + ", title=" + title + ", content=" + content + ", imageFullPath=" + imageFullPath
+				+ ", createtime=" + createtime + ", adminname=" + adminname + ", permission=" + permission + "]";
+	}
+
+    
+
+	
 }

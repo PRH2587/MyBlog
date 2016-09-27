@@ -1,4 +1,6 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
+<%@ attribute name="pageId" required="true" type="java.lang.String"%>
+
 <!DOCTYPE html>
 <head>
 <jsp:include page="../../pages/commen/meta.jsp" />
@@ -9,7 +11,9 @@
 		<header>
 			<jsp:include page="../../pages/commen/header.jsp" />
 		</header>
-		<jsp:doBody />
+		<div id="<%=pageId%>">
+			<jsp:doBody />
+		</div>
 		<footer>
 			<jsp:include page="../../pages/commen/footer.jsp" />
 		</footer>

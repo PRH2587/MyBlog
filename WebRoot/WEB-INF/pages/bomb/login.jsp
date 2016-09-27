@@ -22,17 +22,17 @@
 									</h3></label>
 								<hr class="hrstyle" />
 								<form:form name="form1" method="post"
-									action="${pageContext.request.contextPath}/user/login">
+									action="${pageContext.request.contextPath}/user/login" modelAttribute="userview">
 									<h3>你好 !! 欢迎登陆我的博客.</h3>
 									<p>[Ready to use]
 										登陆我的博客可以留言，还有一些使用有趣的应用.如果有意见和建议就给我留言或联系我吧！</p>
 
 
 									<label> <span>Name*:</span> <input type="text"
-										placeholder="Please enter your username" name="name" required>
+										placeholder="Please enter your username" name="userinfo.name" required>
 									</label>
 									<label> <span>Password*:</span> <input type="text"
-										placeholder="Please enter your password" name="password"
+										placeholder="Please enter your password" name="userinfo.password"
 										required>
 									</label>
 									<input class="sendButton" type="submit" name="Submit"

@@ -20,8 +20,10 @@
 			</div>
 			<div class="top-search">
 
-				<form method="get" action="${pageContext.request.contextPath}/bomb/search" id="search">
-					<input name="q" type="text" size="40" placeholder="Search...->Enter" />
+				<form method="get"
+					action="${pageContext.request.contextPath}/bomb/search" id="search">
+					<input name="q" type="text" size="40"
+						placeholder="Search...->Enter" />
 				</form>
 			</div>
 		</div>
@@ -59,7 +61,8 @@
 									<li><a href="#">感悟</a></li>
 								</ul></li>
 						</ul></li>
-					<li><a href="#">关于</a></li>
+					<li><a href="${pageContext.request.contextPath}/bomb/write" onclick="toWrite()">Write
+							Here</a></li>
 					<li><a href="${pageContext.request.contextPath}/bomb/contact">给博主留言</a></li>
 				</ul>
 			</nav>
@@ -67,3 +70,11 @@
 
 	</div>
 </div>
+<script>
+function toWrite(){
+	if(view.userinfo ==null){
+		alert("您还未登录，请登录");
+	}
+	window.location = "${pageContext.request.contextPath}/bomb/write";
+}
+</script>

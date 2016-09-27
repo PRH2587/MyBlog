@@ -5,7 +5,7 @@
 <%@ taglib prefix="layout" tagdir="/WEB-INF/tags/layout"%>
 
 <!--------------single--------------->
-<layout:Default>
+<layout:Default pageId="Single">
 	<section class="container page-single">
 		<div class="wrap-container zerogrid">
 			<div class="col-2-3">
@@ -17,7 +17,7 @@
 							<div class="art-header">
 								<h2>${view.bloginfo.title}</h2>
 								<div class="info">
-									By Admin on ${view.bloginfo.createtime} with <a href="#">01
+									By 后台管理员 on ${view.bloginfo.createtime} with <a href="#">01
 										Commnets</a>
 								</div>
 								<div class="line"></div>

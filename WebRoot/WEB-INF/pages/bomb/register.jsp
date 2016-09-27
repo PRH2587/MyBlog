@@ -20,19 +20,19 @@
 						<div class="art-content">
 							<div id="contact_form">
 								<form:form name="form1" id="ff" method="post"
-									action="${pageContext.request.contextPath}/user/register">
+									action="${pageContext.request.contextPath}/user/register" modelAttribute="userview">
 									<h3>你好 !! 欢迎注册我的博客.</h3>
 									<p>[Ready to use] 谢谢注册我的博客，此网站不涉及经济和私人信息，仅供交流娱乐！多提宝贵意见！</p>
 
 									<label> <span>名称:</span> <input type="text"
-										placeholder="Please enter your username" name="name" required>
+										placeholder="Please enter your username" name="userinfo.name" required>
 									</label>
 									<label> <span>昵称:</span> <input type="text"
-										placeholder="Please enter your nickname" name="nickname"
+										placeholder="Please enter your nickname" name="userinfo.nickname"
 										required>
 									</label>
 									<label> <span>密码:</span> <input type="text"
-										placeholder="Please enter your password" name="password"
+										placeholder="Please enter your password" name="userinfo.password"
 										required>
 									</label>
 									<label> <span>选择你的图片:</span> <filed:images

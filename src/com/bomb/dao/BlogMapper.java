@@ -5,7 +5,7 @@ import com.bomb.model.BlogExample;
 import java.util.List;
 
 public interface BlogMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(Blog record);
 
@@ -19,5 +19,7 @@ public interface BlogMapper {
 
     int updateByPrimaryKey(Blog record);
     
-    Blog getidByAdminBlogs(String id);
+    List<Blog> getidByAdminBlogs(String permission);
+    
+    Integer selectCountByExample(BlogExample example);
 }

@@ -1,6 +1,7 @@
 package com.test;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -24,6 +25,14 @@ public class BlogMappereTest {
 	
 	@Autowired
 	BlogService blogser;
+	
+	@Test
+	public void for_() {
+		for(int i=0;i<10;i++){
+			insert();
+		}
+
+	}
 
 	@Test
 	public void insert() {
@@ -53,9 +62,18 @@ public class BlogMappereTest {
 	
 	@Test
 	public void getidByAdminBlogs(){
-		String id = "AUWC66RUM2F41GG98SSKJSB56MVFPZSH";
-		Blog b = blogmapper.getidByAdminBlogs(id);
-		System.out.println(b);
+		String id = "SLZQLT9UFSR6Z1S18JAR0NHLCFAO7PL4";
+		List<Blog> b = blogmapper.getidByAdminBlogs(id);
+		for(int i=0;i<b.size();i++){
+			System.out.println(b.get(i));
+		}
+	}
+	
+	@Test
+	public void delet(){
+		String id = "SP72KRKK5ZRA4HACK6TUK6Z8V9H3XPJR";
+		
+		blogmapper.deleteByPrimaryKey(id);
 	}
 
 }

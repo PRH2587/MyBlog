@@ -5,13 +5,15 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.bomb.dto.BlogView;
 import com.bomb.model.User;
 import com.bomb.service.UserService;
+
 
 @SessionAttributes("sessionuser")
 @Controller
@@ -23,7 +25,7 @@ public class UserController {
 	@Autowired
 	UserService userservice;
 
-	@RequestMapping("/login")
+	/*@RequestMapping("/login")
 	public String login(User u, ModelMap model) {
 		logger.info("前台输入用户-->>" + u);
 		String username = u.getName();
@@ -39,8 +41,24 @@ public class UserController {
 			}
 		}
 
+	}*/
+	
+	@RequestMapping("/login")
+	public String login(@ModelAttribute("userview") BlogView userview, Model modle) {
+		logger.info("获取登陆用户-->>"+userview);
+		String username = userview.getUserinfo().getName();
+		List<User> list = userservice.infoByName(username);
+		if (list == null || list.size() < 1) {
+			return "bomb/login";
+		} else {
+			if (list.get(0).getPassword().equals(userview.getUserinfo().getPassword())) {
+				modle.addAttribute("sessionuser", list.get(0));
+				return "bomb/index";
+			} else {
+				return "bomb/register";
+			}
+		}
 	}
-
 	@RequestMapping("/gologin")
 	public String gologin() {
 
@@ -54,8 +72,9 @@ public class UserController {
 	}
 
 	@RequestMapping("/register")
-	public String register(User u) {
-		userservice.save(u);
+	public String register(@ModelAttribute BlogView view, Model modle) {
+		logger.info("注册-->>"+view.getUserinfo());
+		userservice.save(view.getUserinfo());
 		return "bomb/login";
 	}
 
