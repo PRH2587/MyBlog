@@ -24,7 +24,6 @@
 <script src="${path}/resources/js/jquery-1.7.2.js"></script>
 <script src="${path}/resources/js/jquery.min.js"></script>
 <script src="${path}/resources/js/index.js"></script>
-<script src="${path}/resources/js/navigation.js"></script>
 <script src="${path}/resources/plugins/datetime/daterangepicker.js"></script>
 <script
 	src="${path}/resources/plugins/datetime/bootstrap-datetimepicker.min.js"></script>

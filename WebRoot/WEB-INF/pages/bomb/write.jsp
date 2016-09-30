@@ -6,7 +6,7 @@
 <%@ taglib prefix="filed" tagdir="/WEB-INF/tags/files"%>
 
 <!--------------single--------------->
-<layout:Default>
+<layout:Default pageId="Write">
 	<section class="container page-single">
 		<div class="wrap-container zerogrid">
 			<div class="col-2-3">
@@ -15,19 +15,18 @@
 						action="${pageContext.request.contextPath}/bomb/addWrite"
 						method="post" modelAttribute="view">
 						<article>
+							<span>选择你的照片</span>
+							<filed:images suffixName="imageFullPath" styleId="bloginfo"
+								preffixName="view" limit="1"></filed:images>
+							<input type="hidden" name="bloginfo.imageFullPath">
 							<table width="100%">
-								<tr>
-									<td height="100px">选择图片:</td>
-									<td><filed:images suffixName="bloginfo" styleId="salt"
-											preffixName="salt" limit="1"></filed:images></td>
-								</tr>
-								<td height="50px"><input type="text" placeholder="输入您的标题"
-									name="bloginfo.title" required></td>
+								<td height="50px"><input type="text"
+									placeholder="输入您的标题..." name="bloginfo.title" required></td>
 								<tr>
 								</tr>
 								<tr>
 									<td height="500px"><textarea name="bloginfo.content"
-											style="height: 100%;"></textarea></td>
+											placeholder="输入您的内容..." style="height: 100%;"></textarea></td>
 								</tr>
 							</table>
 							<div class="tag">
@@ -39,7 +38,8 @@
 								</ul>
 							</div>
 						</article>
-						<input class="sendButton" type="submit" value="提交文章">
+						<input class="sendButton" type="button" value="提交文章"
+							onclick="saveInfo()">
 					</form:form>
 					<div class="art-related">
 						<span>更多博文</span>
@@ -60,5 +60,18 @@
 			</div>
 			<jsp:include page="../../pages/bomb/sidebar.jsp" />
 		</div>
-	</section>
+	</section>http://localhost:8080/MyBlog/bomb/index
+	<script>
+		function saveInfo() {
+			var _imageFullPath = $
+			{
+				"input [name='view.[1].imageFullPath']"
+			}
+			;
+			alert(_imageFullPath);
+			_imageFullPath.attr("name", "bloginfo.imageFullPath");
+			/* document.forms[1].action = "${pageContext.request.contextPath}/bomb/addWrite"; */
+			document.forms[1].submit();
+		}
+	</script>
 </layout:Default>

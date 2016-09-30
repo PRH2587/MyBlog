@@ -45,24 +45,15 @@
 						<div class="m shake shake-slow"></div>
 						<div class="s shake shake-slow"></div>
 					</li>
-					<li><a href="${pageContext.request.contextPath}/user/gologin">欢迎${sessionScope.sessionuser.name}登陆</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/gologin"
+						class="parent">欢迎${sessionScope.sessionuser.name}登陆</a>
+						<div class="second">
+							<a href='${pageContext.request.contextPath}/user/loginout'>登出</a>
+						</div></li>
 					<li><a href="${pageContext.request.contextPath}/bomb/index">主页</a></li>
-					<li><a href="#" class="parent">博客博文</a>
-						<ul>
-							<li><a href="#" class="parent">普通帖</a>
-								<ul>
-									<li><a href="#">普通区</a></li>
-									<li><a href="#">工作区</a></li>
-									<li><a href="#">灌水区</a></li>
-								</ul></li>
-							<li><a href="#" class="parent">经验帖</a>
-								<ul>
-									<li><a href="#">Java 学习之路</a></li>
-									<li><a href="#">感悟</a></li>
-								</ul></li>
-						</ul></li>
-					<li><a href="${pageContext.request.contextPath}/bomb/write" onclick="toWrite()">Write
-							Here</a></li>
+					<li><a href="#">放什么好?</a></li>
+					<li><a href="${pageContext.request.contextPath}/bomb/write"
+						onclick="toWrite()">Write Here</a></li>
 					<li><a href="${pageContext.request.contextPath}/bomb/contact">给博主留言</a></li>
 				</ul>
 			</nav>
@@ -71,10 +62,27 @@
 	</div>
 </div>
 <script>
-function toWrite(){
-	if(view.userinfo ==null){
-		alert("您还未登录，请登录");
+	function toWrite() {
+		
+		if (view.userinfo == null) {
+			alert("您还未登录，请登录");
+		}
+		window.location = "${pageContext.request.contextPath}/bomb/write";
 	}
-	window.location = "${pageContext.request.contextPath}/bomb/write";
-}
+	$(function() {
+		var zzsc = 1; // 默认值为0，二级菜单向下滑动显示；值为1，则二级菜单向上滑动显示
+		if (zzsc == 0) {
+			$('.col-2-3 li').hover(function() {
+				$('.second', this).css('top', '20px').show();
+			}, function() {
+				$('.second', this).hide();
+			});
+		} else if (zzsc == 1) {
+			$('.col-2-3 li').hover(function() {
+				$('.second', this).css('bottom', '20px').show();
+			}, function() {
+				$('.second', this).hide();
+			});
+		}
+	});
 </script>

@@ -1,5 +1,6 @@
 package com.bomb.controller;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.bomb.base.page.Page;
 import com.bomb.dto.BlogView;
 import com.bomb.model.Blog;
+import com.bomb.model.UserMessage;
 import com.bomb.service.BlogService;
+import com.bomb.service.UserMessageService;
 
 @Controller
 @RequestMapping("/bomb")
@@ -23,6 +26,9 @@ public class BlogController {
 
 	@Autowired
 	BlogService blogservice;
+	
+	@Autowired
+	UserMessageService userMessageService;
 
 	/*
 	 * 
@@ -64,11 +70,14 @@ public class BlogController {
 		return "bomb/contact";
 	}
 
+	
 	@RequestMapping("/single")
 	public String single(@ModelAttribute BlogView view, Model model) {
 		logger.info("Input BlogView [view] -> " + view);
 		if (view.getBloginfo() != null && view.getBloginfo().getId() != null && view.getBloginfo().getId() != "") {
-			Blog bloginfo = blogservice.info(view.getBloginfo().getId());
+			Blog bloginfo = blogservice.BlogAndMesinfo(view.getBloginfo().getId());
+			UserMessage userMes = userMessageService.findUsername(2);
+			System.out.println("userid是2的评论数--》》"+userMes.getUsername().getNickname());	
 			view.setBloginfo(bloginfo);
 		}
 		model.addAttribute("view", view);
@@ -92,11 +101,10 @@ public class BlogController {
 
 		if (view.getBloginfo() != null) {
 			Date time = new Date();
-
 			view.getBloginfo().setCreatetime(time);
+			view.getBloginfo().setBlogId(1);
 			view.getBloginfo().setPermission("SLZQLT9UFSR6Z1S18JAR0NHLCFAO7PL4");
 			view.getBloginfo().setAdminname(view.getBloginfo().getAdminname());
-			view.getBloginfo().setImageFullPath("images/img03.jpg");
 			blogservice.addBlog(view.getBloginfo());
 		}
 

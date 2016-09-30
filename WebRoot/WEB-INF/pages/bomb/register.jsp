@@ -7,7 +7,7 @@
 
 
 <!--------------Contact--------------->
-<layout:Default>
+<layout:Default pageId="Register">
 	<section class="container page-single">
 		<div class="wrap-container zerogrid">
 			<div class="col-2-3">
@@ -34,9 +34,12 @@
 									<label> <span>密码:</span> <input type="text"
 										placeholder="Please enter your password" name="userinfo.password"
 										required>
+										<input type="hidden"
+										 name="userinfo.userId" value="999"
+										>
 									</label>
 									<label> <span>选择你的图片:</span> <filed:images
-											suffixName="userInfo" styleId="salt" preffixName="salt" limit="3"></filed:images>
+											suffixName="userInfo" styleId="salt" preffixName="salt" limit="1"></filed:images>
 									</label>
 									<input class="sendButton" type="submit" value="注册">
 
@@ -49,4 +52,10 @@
 			<jsp:include page="../../pages/bomb/sidebar.jsp" />
 		</div>
 	</section>
+	<script>
+	function(){
+		var _salt=$("input[name='slat.[0].slat']");
+		alert(_salt);
+	}
+	</script>
 </layout:Default>

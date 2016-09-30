@@ -37,13 +37,19 @@
 						</article>
 						<div class="art-related">
 							<span>文章评论列表：</span>
-							<div class="row">
-								<div class="blogr">评论用户信息</div>
-								<div class="blogl">
-								    <div class="blogl-up">时间状态</div>
-								    <div class="blogl-down">评论内容</div>
-								</div>
-							</div>
+							<form>
+							<table width="100%">
+								<td height="50px"><input type="text" placeholder="输入您的标题..."
+									name="" required></td>
+								<tr>
+								</tr>
+								<tr>
+									<td height="300px"><textarea name=" placeholder="输入您评论的内容..."
+											style="height: 100%;"></textarea></td>
+								</tr>
+							</table>
+							<input class="sendButton" type="submit" value="发表评论">
+							</form>
 						</div>
 					</form:form>
 					<div class="art-related">
@@ -63,7 +69,7 @@
 
 				</div>
 			</div>
-			<jsp:include page="../../pages/bomb/sidebar.jsp" />
+			<jsp:include page="../../pages/bomb/messages.jsp" />
 		</div>
 	</section>
 </layout:Default>

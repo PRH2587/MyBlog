@@ -12,6 +12,8 @@ public interface BlogService {
 	public List<Blog> list2(String permission,Page page);
 
 	public Blog info(String id);
+	
+	public Blog BlogAndMesinfo(String id);
 
 	public void update(String id);
 

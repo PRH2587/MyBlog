@@ -5,7 +5,7 @@
 <%@ taglib prefix="layout" tagdir="/WEB-INF/tags/layout"%>
 
 <!--------------Login--------------->
-<layout:Default>
+<layout:Default pageId="lOGIN">
 	<section class="container page-single">
 		<div class="wrap-container zerogrid">
 			<div class="col-2-3">

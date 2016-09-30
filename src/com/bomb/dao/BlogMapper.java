@@ -22,4 +22,6 @@ public interface BlogMapper {
     List<Blog> getidByAdminBlogs(String permission);
     
     Integer selectCountByExample(BlogExample example);
+    
+    Blog selectBlogmessages(String id);
 }

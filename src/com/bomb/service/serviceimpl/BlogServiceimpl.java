@@ -81,4 +81,10 @@ public class BlogServiceimpl implements BlogService {
 		}
 		return blogmapper.getidByAdminBlogs(permission);
 	}
+
+	@Override
+	public Blog BlogAndMesinfo(String id) {
+		// TODO Auto-generated method stub
+		return blogmapper.selectBlogmessages(id);
+	}
 }

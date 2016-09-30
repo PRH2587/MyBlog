@@ -9,8 +9,20 @@
 			jdbcType="VARCHAR" />
 		<result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
 		<result column="permission" property="permission" jdbcType="CHAR" />
+		<result column="blog_id" property="blogId" jdbcType="INTEGER" />
 		<association property="adminname" javaType="com.bomb.model.AdminUser"
 			resultMap="AdminUserResultMap" />
+		<collection property="listMessages" ofType="com.bomb.model.UserMessage"
+			resultMap="UserMessageResultMap" column="pid" />
+	</resultMap>
+
+	<resultMap id="UserMessageResultMap" type="com.bomb.model.UserMessage">
+		<id column="id" property="id" jdbcType="CHAR" />
+		<result column="image_path" property="imagePath" jdbcType="VARCHAR" />
+		<result column="message" property="message" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="TIMESTAMP" />
+		<result column="blog_id" property="blogId" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
 	</resultMap>
 
 	<resultMap id="AdminUserResultMap" type="com.bomb.model.AdminUser">
@@ -19,6 +31,25 @@
 		<result column="t_password" property="password" jdbcType="VARCHAR" />
 		<result column="t_permission" property="permission" jdbcType="CHAR" />
 	</resultMap>
+
+	<select id="selectBlogmessages" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		B.id id,
+		B.title title,
+		B.content content,
+		B.image_full_path image_full_path,
+		B.createtime createtime,
+		M.image_path image_path,
+		M.message message,
+		M.time time,
+		M.blog_id blog_id
+		from
+		net_blog B,
+		net_user_message M where M.blog_id = B.blog_id
+		and B.id =
+		#{id,jdbcType=CHAR}
+	</select>
 
 	<select id="getidByAdminBlogs" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
@@ -32,7 +63,8 @@
 		A.adminname t_adminname
 		from net_blog B left outer join net_admin A on
 		B.permission = A.permission
-		where B.permission = #{permission,jdbcType=CHAR}
+		where B.permission =
+		#{permission,jdbcType=CHAR}
 	</select>
 
 	<sql id="Example_Where_Clause">
@@ -100,12 +132,14 @@
 	<insert id="insert" parameterType="com.bomb.model.Blog">
 		insert into net_blog (id,
 		title, content,
-		image_full_path, createtime)
+		image_full_path, createtime, permission,
+		blog_id)
 		values
 		(#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR},
 		#{content,jdbcType=VARCHAR},
 		#{imageFullPath,jdbcType=VARCHAR},
-		#{createtime,jdbcType=TIMESTAMP})
+		#{createtime,jdbcType=TIMESTAMP}, #{permission,jdbcType=CHAR},
+		#{blogId,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" parameterType="com.bomb.model.Blog">
 		insert into net_blog

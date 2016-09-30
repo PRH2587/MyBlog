@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bomb.dto.BlogView;
 import com.bomb.model.User;
@@ -43,6 +44,7 @@ public class UserController {
 
 	}*/
 	
+	
 	@RequestMapping("/login")
 	public String login(@ModelAttribute("userview") BlogView userview, Model modle) {
 		logger.info("获取登陆用户-->>"+userview);
@@ -53,12 +55,19 @@ public class UserController {
 		} else {
 			if (list.get(0).getPassword().equals(userview.getUserinfo().getPassword())) {
 				modle.addAttribute("sessionuser", list.get(0));
-				return "bomb/index";
+				return "bomb/index2";
 			} else {
 				return "bomb/register";
 			}
 		}
 	}
+	
+	@RequestMapping("/loginout")
+	public String loginout() {
+		
+		return "bomb/index2";
+	}
+	
 	@RequestMapping("/gologin")
 	public String gologin() {
 

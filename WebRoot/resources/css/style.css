@@ -338,32 +338,6 @@ footer .menu-bottom ul li {
 	text-overflow: ellipsis;
 }
 
-.blogr {
-	height: 266px;
-	width: 30%;
-	float: left;
-	border: 1px solid #400000;
-}
-
-.blogl {
-	height: 266px;
-	width: 100%;
-	float: light
-	border: 1px solid #400000;
-	
-}
-
-.blogl-up {
-	height: 66px;
-	width: 100%;
-	border: 1px solid #400000;
-}
-
-.blogl-down {
-	height: 200px;
-	width: 100%;
-	border: 1px solid #400000;
-}
 .hrstyle{
   height:10px;border:none;
   border-top:10px groove skyblue;

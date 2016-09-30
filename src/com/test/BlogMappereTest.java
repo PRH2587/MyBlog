@@ -71,9 +71,17 @@ public class BlogMappereTest {
 	
 	@Test
 	public void delet(){
-		String id = "SP72KRKK5ZRA4HACK6TUK6Z8V9H3XPJR";
+		String id = "J0SIV8ISEK94I1DMBAXBJU5O1GVWTWB7";
 		
 		blogmapper.deleteByPrimaryKey(id);
+	}
+	
+	@Test
+	public void selectBlogAndM(){
+		String id = "A5Z1ZYLI8S38HJ0GS1FIG4ZFN7QCB119";
+		Blog bm = blogmapper.selectBlogmessages(id);
+		logger.info("Blog拥有的评论数"+bm.getListMessages().size());
+		
 	}
 
 }

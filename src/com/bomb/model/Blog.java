@@ -1,11 +1,14 @@
 package com.bomb.model;
 
 import java.util.Date;
+import java.util.List;
 
 import com.bomb.base.StringUtil;
 
 public class Blog {
 	private String id = StringUtil.createUUID();
+
+	private AdminUser adminname;
 
 	private String title;
 
@@ -15,9 +18,19 @@ public class Blog {
 
 	private Date createtime;
 
-	private AdminUser adminname;
-
 	private String permission;
+
+	private Integer blogId;
+
+	private List<UserMessage> listMessages;
+
+	public List<UserMessage> getListMessages() {
+		return listMessages;
+	}
+
+	public void setListMessages(List<UserMessage> listMessages) {
+		this.listMessages = listMessages;
+	}
 
 	public String getId() {
 		return id;
@@ -59,14 +72,6 @@ public class Blog {
 		this.createtime = createtime;
 	}
 
-	public AdminUser getAdminname() {
-		return adminname;
-	}
-
-	public void setAdminname(AdminUser adminname) {
-		this.adminname = adminname;
-	}
-
 	public String getPermission() {
 		return permission;
 	}
@@ -75,13 +80,27 @@ public class Blog {
 		this.permission = permission;
 	}
 
-	@Override
-	public String toString() {
-		return "Blog [id=" + id + ", title=" + title + ", content=" + content + ", imageFullPath=" + imageFullPath
-				+ ", createtime=" + createtime + ", adminname=" + adminname + ", permission=" + permission + "]";
+	public Integer getBlogId() {
+		return blogId;
 	}
 
-    
+	public void setBlogId(Integer blogId) {
+		this.blogId = blogId;
+	}
 
-	
+	public AdminUser getAdminname() {
+		return adminname;
+	}
+
+	public void setAdminname(AdminUser adminname) {
+		this.adminname = adminname;
+	}
+
+	@Override
+	public String toString() {
+		return "Blog [id=" + id + ", adminname=" + adminname + ", title=" + title + ", content=" + content
+				+ ", imageFullPath=" + imageFullPath + ", createtime=" + createtime + ", permission=" + permission
+				+ ", blogId=" + blogId + "]";
+	}
+
 }
