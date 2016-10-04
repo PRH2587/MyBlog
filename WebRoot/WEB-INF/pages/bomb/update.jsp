@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="layout" tagdir="/WEB-INF/tags/layout"%>
+<%@ taglib prefix="filed" tagdir="/WEB-INF/tags/files"%>
 
 <!--------------single--------------->
 <layout:Default pageId="Single">
@@ -10,20 +11,20 @@
 		<div class="wrap-container zerogrid">
 			<div class="col-2-3">
 				<div id="main-content" class="wrap-col">
-					<form:form action="" method="post" modelAttribute="view">
+					<form:form action="${pageContext.request.contextPath}/bomb/deletinfo" method="post" modelAttribute="view">
 						<form:hidden path="bloginfo.id" />
 						<article>
-							<img src=" ${view.bloginfo.imageFullPath}" />
+						   <filed:images suffixName="imageFullPath" styleId="bloginfo"
+								preffixName="view" limit="1"/>
 							<div class="art-header">
-								<h2>${view.bloginfo.title}</h2>
+								<h2><form:input path="bloginfo.title" name="bloginfo.title"/></h2>
 								<div class="info">
-									By 后台管理员 on ${view.bloginfo.createtime} with <a href="#">01
-										Commnets</a>
+									由 后台管理员 在 <form:input path="bloginfo.createtime" name="bloginfo.createtime"/> 創建 
 								</div>
 								<div class="line"></div>
 							</div>
 							<div class="art-content">
-								<p>${view.bloginfo.content}</p>
+								<p><form:textarea path="bloginfo.content" style="height:300px;"/></p>
 
 							</div>
 							<div class="tag">
@@ -35,22 +36,8 @@
 								</ul>
 							</div>
 						</article>
-						<div class="art-related">
-							<span>文章评论列表：</span>
-							<form action="" method="post">
-							<table width="100%">
-								<td height="50px"><input type="text" placeholder="输入您的标题..."
-									name="" required></td>
-								<tr>
-								</tr>
-								<tr>
-									<td height="300px"><textarea name="" placeholder="输入您评论的内容..."
-											style="height: 100%;"></textarea></td>
-								</tr>
-							</table>
-							<input class="sendButton" type="submit" value="发表评论">
-							</form>
-						</div>
+						<input class="sendButton" type="submit" value="刪除">
+						<h1><a onclick="Update()">更新</a></h1>
 					</form:form>
 					<div class="art-related">
 						<span>更多博文</span>
@@ -72,4 +59,12 @@
 			<jsp:include page="../../pages/bomb/messages.jsp" />
 		</div>
 	</section>
+	
+	<script>
+       function Update() {
+    	 $("input[name='view.[0].imageFullPath']").attr("name","bloginfo.imageFullPath");
+		 document.forms[1].action = "${pageContext.request.contextPath}/bomb/updateinfo";
+		 document.forms[1].submit();
+		}
+	</script>
 </layout:Default>

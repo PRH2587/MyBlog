@@ -15,7 +15,7 @@ public interface BlogService {
 	
 	public Blog BlogAndMesinfo(String id);
 
-	public void update(String id);
+	public void update(Blog  bloginfo);
 
 	public void delete(String id);
 

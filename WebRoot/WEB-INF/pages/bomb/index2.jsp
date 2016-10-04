@@ -11,7 +11,7 @@
 	<!--------------Index--------------->
 	<section class="container page-home">
 		<div id="main-content" class="wrap-container zerogrid">
-			<form:form action="${pageContext.request.contextPath}/bomb/update"
+			<form:form action=""
 				method="post" modelAttribute="view">
 				<input type="hidden" name="bloginfo.id" id="Blogid" />
 				<c:if test="${!empty view.list}">
@@ -23,13 +23,13 @@
 									src="${blogs.imageFullPath}" />
 							</div>
 							<div class="col-1-2 left">
-								<a class="art-category left" href="#">Design</a>
+								<a class="art-category left" href="#" onclick="update('${blogs.id}')">Design</a>
 								<div class="clear"></div>
 								<div class="art-content">
 									<h2>${blogs.title}</h2>
 									<div class="info">
 										由 ${blogs.adminname.adminname}在 ${blogs.createtime}创建<a
-											href="#">-->评论</a>
+											href="#" onclick="getId('${blogs.id}')">-->评论</a>
 									</div>
 									<div class="line"></div>
 									<p class="contect">${blogs.content}</p>
@@ -72,7 +72,13 @@
 			document.forms[1].Blogid.value = blogId;
 			document.forms[1].submit();
 		}
-
+		
+		function update(blogId) {
+			document.forms[1].action = "${pageContext.request.contextPath}/bomb/update";
+			document.forms[1].Blogid.value = blogId;
+			document.forms[1].submit();
+		}
+		
 		function page(pageNo) {
 			$("#pageNo").val(pageNo);
 			document.forms[1].action = "${pageContext.request.contextPath}/bomb/index";

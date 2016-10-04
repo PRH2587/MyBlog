@@ -1,4 +1,4 @@
-package com.bomb.controller;
+	package com.bomb.controller;
 
 
 import java.util.Date;
@@ -53,7 +53,7 @@ public class BlogController {
 		}
 		if (view.getPage() == null) {
 			Page page = new Page();
-			page.setPageNo(1);
+			page.setPageNo(2);
 			view.setPage(page);
 		}
 		Integer total = blogservice.count(view.getBloginfo());
@@ -85,14 +85,32 @@ public class BlogController {
 	}
 
 	@RequestMapping("/update")
-	public String update() {
-		return "";
+	public String update(@ModelAttribute BlogView view, Model model) {
+		logger.info("Input BlogView [view] -> " + view);
+		if (view.getBloginfo() != null && view.getBloginfo().getId() != null && view.getBloginfo().getId() != "") {
+			Blog bloginfo = blogservice.BlogAndMesinfo(view.getBloginfo().getId());
+		    view.setBloginfo(bloginfo);
+		}
+		model.addAttribute("view", view);
+		return "bomb/update";
 	}
 
-	@RequestMapping("/write")
-	public String write() {
-
-		return "bomb/write";
+	@RequestMapping("/deletinfo")
+	public String deletinfo(@ModelAttribute BlogView view, Model model) {
+		logger.info("Delet Down");
+          if(view.getBloginfo().getId()!=null){
+        	  blogservice.delete(view.getBloginfo().getId());
+          }
+		return index(view, model);
+	}
+	
+	@RequestMapping("/updateinfo")
+	public String updateinfo(@ModelAttribute BlogView view, Model model) {
+		logger.info("Update Down");
+          if(view.getBloginfo().getId()!=null){
+        	  blogservice.update(view.getBloginfo());
+          }
+		return index(view, model);
 	}
 
 	@RequestMapping("/addWrite")

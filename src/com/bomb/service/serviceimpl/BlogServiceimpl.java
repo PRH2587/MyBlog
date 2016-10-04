@@ -40,14 +40,8 @@ public class BlogServiceimpl implements BlogService {
 	}
 
 	@Override
-	public void update(String id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete(String id) {
-		// TODO Auto-generated method stub
+		blogmapper.deleteByPrimaryKey(id);
 
 	}
 
@@ -86,5 +80,13 @@ public class BlogServiceimpl implements BlogService {
 	public Blog BlogAndMesinfo(String id) {
 		// TODO Auto-generated method stub
 		return blogmapper.selectBlogmessages(id);
+	}
+
+	@Override
+	public void update(Blog bloginfo) {
+		bloginfo.setAdminname(bloginfo.getAdminname());
+		bloginfo.setCreatetime(bloginfo.getCreatetime());
+		blogmapper.updateByPrimaryKey(bloginfo);
+		
 	}
 }

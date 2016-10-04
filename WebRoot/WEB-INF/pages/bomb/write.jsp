@@ -18,7 +18,7 @@
 							<span>选择你的照片</span>
 							<filed:images suffixName="imageFullPath" styleId="bloginfo"
 								preffixName="view" limit="1"></filed:images>
-							<input type="hidden" name="bloginfo.imageFullPath">
+							
 							<table width="100%">
 								<td height="50px"><input type="text"
 									placeholder="输入您的标题..." name="bloginfo.title" required></td>
@@ -60,18 +60,39 @@
 			</div>
 			<jsp:include page="../../pages/bomb/sidebar.jsp" />
 		</div>
-	</section>http://localhost:8080/MyBlog/bomb/index
+	</section>
 	<script>
-		function saveInfo() {
-			var _imageFullPath = $
-			{
-				"input [name='view.[1].imageFullPath']"
+	
+	/* function register()
+	{
+		$("input[name='salt.[0].salt']").attr("name","salt");
+		var formData = $("#form").serialize2Json();
+		console.log(formData);
+		$.ajax({
+		type :"POST",
+		contentType : "application/json;charset=utf-8",
+		url : _path+"/loujiang/add",
+		dataType : "json",
+		data : JSON.stringify(formData),
+		success : function(data) {
+			if (data.status == "S") {
+				window.location = _path + "/loujiang/list";
+			} else if (data.status == "F") {
+				//alert(data.message);	
+				window.location = _path + "/loujiang/list";
 			}
-			;
-			alert(_imageFullPath);
-			_imageFullPath.attr("name", "bloginfo.imageFullPath");
-			/* document.forms[1].action = "${pageContext.request.contextPath}/bomb/addWrite"; */
-			document.forms[1].submit();
+		},
+		error : function() {
+			//alert("error");
+			window.location = _path + "/loujiang/list";
+		}
+	});			
+	} */
+	
+		function saveInfo() {
+		 $("input[name='view.[0].imageFullPath']").attr("name","bloginfo.imageFullPath");
+		 document.forms[1].action = "${pageContext.request.contextPath}/bomb/addWrite";
+		 document.forms[1].submit();
 		}
 	</script>
 </layout:Default>

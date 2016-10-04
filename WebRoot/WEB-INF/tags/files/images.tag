@@ -19,6 +19,12 @@
 			<span class="plusText">
 				<span style="color: #e02222; font-size: 12px; padding-left: 2px;">*</span>
 			</span>
+			<c:if test="${view.bloginfo.imageFullPath==''}">
+			<img src="${pageContext.request.contextPath}/images/upload_logo.png" style="height: 170px; width: 300px;" />
+			</c:if>
+			<c:if test="${view.bloginfo.imageFullPath!=''}">
+			<img src="${view.bloginfo.imageFullPath}" style="height: 170px; width: 300px;" />
+			</c:if>
 			<img src="${pageContext.request.contextPath}/images/upload_logo.png" style="height: 170px; width: 300px;" />
 			<input type="hidden" name="<%=preffixName%>.[0].<%=suffixName%>" class="requiredInput" value=""/>
 		</div>
